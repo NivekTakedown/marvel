@@ -1,5 +1,6 @@
 import React from 'react';
 import './styles.css';
+export default AboutUs ;
 
 function AboutUs() {
   return (
@@ -9,9 +10,9 @@ function AboutUs() {
         <h1>Conoce más</h1>
         <nav>
           <ul>
-            <li><a href="index.html">Inicio</a></li>
-            <li><a href="Comics.html">Comics</a></li>
-            <li><a href="Nosotros.html">Nosotros</a></li>
+            <li><a href="">Inicio</a></li>
+            <li><a href="/appMain">Comics</a></li>
+            <li><a href="/AboutUs">Nosotros</a></li>
           </ul>
         </nav>
       </header>

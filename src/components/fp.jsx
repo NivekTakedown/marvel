@@ -1,5 +1,6 @@
 import React from 'react';
 import './styles.css';
+export default ForgotPassword ;
 
 function ForgotPassword() {
   return (
@@ -9,9 +10,9 @@ function ForgotPassword() {
         <h1>Registrate</h1>
         <nav>
           <ul>
-            <li><a href="index.html">Inicio</a></li>
-            <li><a href="comics.html">Comics</a></li>
-            <li><a href="Nosotros.html">Nosotros</a></li>
+            <li><a href="">Inicio</a></li>
+            <li><a href="appMain">Comics</a></li>
+            <li><a href="AboutUs">Nosotros</a></li>
           </ul>
         </nav>
       </header>
@@ -21,13 +22,13 @@ function ForgotPassword() {
           <div className="title"><span>Contraseña Olvidada</span></div>
           <form action="#">
             <div className="row">
-              <i className="fas fa-envelope"></i>
+              <i className="fas fa-envelope"></i> 
               <input type="email" placeholder="Email" required />
             </div>
             <div className="row button">
               <input type="submit" value="Recuperar Contraseña" />
             </div>
-            <div className="login-link"><a href="Comics.html">Devuelta al login</a></div>
+            <div className="login-link"><a href="/">Devuelta al login</a></div>
           </form>
         </div>
       </div>
