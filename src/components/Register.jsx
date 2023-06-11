@@ -1,33 +1,38 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import axios from 'axios';// importa useHistory desde React Router
 import './styles.css';
 
 function Register() {
   const [nombre, setNombre] = useState('');
-  const [apellido, setApellido] = useState('');
+  const [identificacion, setIdentificacion] = useState('');
   const [email, setEmail] = useState('');
   const [telefono, setTelefono] = useState('');
   const [contrasena, setContrasena] = useState('');
   const [message, setMessage] = useState('');
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
 
-    axios.post('https://marvel-api-production.up.railway.app/api/user/register', {
-      nombre,
-      apellido,
-      correo_electronico: email,
-      telefono,
-      contrasena,
-    })
-      .then(response => {
-        const { info } = response.data;
-        setMessage(info);
-      })
-      .catch(error => {
-        console.error('Error al registrar el usuario:', error);
-        setMessage('Error al registrar el usuario');
-      });
+    try {
+      const response = await axios.post(
+        `${"https://marvel-api-production.up.railway.app/api/user/register"}`,
+        {
+          nombre,
+          identificacion,
+          telefono,
+          correo_electronico: email,
+          contrasena,
+        }
+      );
+      console.log(response);
+      if (response.status === 200) { // verifica si la respuesta es 200
+        //pop up de registro exitoso
+        console.log('Usuario registrado exitosamente');
+       }
+    } catch (error) {
+      console.error(error);
+      console.log('Error al registrar usuario');
+    }
   };
 
   return (
@@ -54,7 +59,7 @@ function Register() {
             </div>
             <div className="row">
               <i className="fas fa-user"></i>
-              <input type="text" placeholder="Apellido" value={apellido} onChange={(e) => setApellido(e.target.value)} required />
+              <input type="text" placeholder="Identificación" value={identificacion} onChange={(e) => setIdentificacion(e.target.value)} required />
             </div>
             <div className="row">
               <i className="fas fa-envelope"></i>
