@@ -17,16 +17,16 @@ function Header(props) {
             <nav>
                 <ul>
                     <li>
-                        <Link to="/">Inicio</Link>
+                        <Link to="/" className="nav-link">Inicio</Link>
                     </li>
                     <li>
-                        <Link to="/AppMain">Comics</Link>
+                        <Link to="/AppMain" className="nav-link">Comics</Link>
                     </li>
                     <li>
-                        <Link to="/AboutUs">Nosotros</Link>
+                        <Link to="/AboutUs" className="nav-link">Nosotros</Link>
                     </li>
                     <li>
-                        <Link to="/Perfil">Perfil</Link>
+                        <Link to="/Perfil" className="nav-link">Perfil</Link>
                     </li>
                 </ul>
             </nav>
