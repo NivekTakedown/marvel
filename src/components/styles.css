@@ -358,6 +358,9 @@ a:hover {
   margin-bottom: 30px;
   color: #ffffff;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  background-color: #000000;
+  padding: 10px 20px;
+  border-radius: 10px;
 }
 
 .comic-details-content p {
@@ -371,7 +374,7 @@ a:hover {
   padding: 16px 32px;
   border: none;
   border-radius: 10px;
-  background-color: #0077c2;
+  background-color: #b80f0f;
   color: #fff;
   cursor: pointer;
   transition: background-color 0.3s ease;

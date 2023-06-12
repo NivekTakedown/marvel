@@ -3,7 +3,6 @@ import axios from 'axios';
 import './styles.css';
 import Header from '../page/header/index.jsx';
 import ComicContent from '../page/ComicContent/index.jsx';
-import FavoritesButton from '../page/buttons/FavoritesButton.jsx';
 import Modal from 'react-modal';
 function ComicDetails() {
   const [comic, setComic] = useState(null);
@@ -73,8 +72,7 @@ function ComicDetails() {
   return (
     <div>
       <Header title="Detalles del cómic" />
-      <ComicContent comic={comic} />
-      <FavoritesButton  addToFavorites={addToFavorites} isFavorite={isFavorite} />
+      <ComicContent comic={comic} addToFavorites={addToFavorites} isFavorite={isFavorite} />
       <Modal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)} className="custom-modal">
         <div>{modalMessage}</div>
         <button onClick={() => setModalIsOpen(false)}>Cerrar</button>
