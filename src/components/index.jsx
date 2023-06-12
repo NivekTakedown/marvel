@@ -36,8 +36,8 @@ function Comics({ comics }) {
           key={comic.id}
           {...comic}
           style={{
-            width: squareSize,
-            height: squareSize,
+            width: squareSize * 0.05,
+            height: squareSize * 0.1,
           }}
         />
       ))}
