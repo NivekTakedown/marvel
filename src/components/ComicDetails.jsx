@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from 'axios'; // Importar archivo CSS personalizado
 
 function ComicDetails() {
   const [comic, setComic] = useState(null);
   const [isFavorite, setIsFavorite] = useState(false);
 
-
+  useEffect(() => {
     const fetchComic = async () => {
       const id = localStorage.getItem('id');
       if (!id) {
@@ -14,17 +14,22 @@ function ComicDetails() {
       }
 
       try {
-        const response = await axios.get('https://marvel-api-production.up.railway.app/api/comics/getComic/', { id: id });
-        const data = response.data;
+        const response = await axios.post(
+          `${"http://localhost:3000/api/comics/getComic"}`,
+          {
+            "id": id 
+          }
+        );
+        const data = response.data.data[0];
         setComic(data);
       } catch (error) {
         console.error(error);
         // Manejo de errores
       }
     };
-    fetchComic();
 
-  
+    fetchComic();
+  }, []);
 
   const addToFavorites = async () => {
     try {
@@ -46,17 +51,19 @@ function ComicDetails() {
   }
 
   return (
-    <div>
-      <img src={comic.image} width="600" height="200" alt={comic.title} />
-      <h2>Comic Details</h2>
-      <p>ID: {comic.id}</p>
-      <p>Title: {comic.title}</p>
-      <p>Description: {comic.description}</p>
-      {isFavorite ? (
-        <button disabled>Agregado a favoritos</button>
-      ) : (
-        <button onClick={addToFavorites}>Agregar a favoritos</button>
-      )}
+    <div className="comic-details-container"> {/* Agregar clase CSS al contenedor */}
+      <img src={comic.image} alt={comic.title} style={{ width: '20%' }} /> {/* Ajustar imagen */}
+      <div className="comic-details-content"> {/* Agregar clase CSS al contenido */}
+        <h2>Comic Details</h2>
+        <p>ID: {comic.id}</p>
+        <p>Title: {comic.title}</p>
+        <p>Description: {comic.description}</p>
+        {isFavorite ? (
+          <button disabled>Agregado a favoritos</button>
+        ) : (
+          <button onClick={addToFavorites}>Agregar a favoritos</button>
+        )}
+      </div>
     </div>
   );
 }
