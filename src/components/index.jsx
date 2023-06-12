@@ -4,16 +4,23 @@ import { Link } from "react-router-dom";
 import "./styles.css";
 import Header from "../page/header/index.jsx";
 
-function Comic({ id, title, image }) {
+function Comic({ id, title, image, maxWidth, maxHeight }) {
   const handleClick = () => {
-    localStorage.setItem('id', id);
-    window.location.href = '/comic/Details';
+    localStorage.setItem("id", id);
+    window.location.href = "/comic/Details";
+  };
+
+  const style = {
+    width: "auto",
+    height: "auto",
+    maxWidth: maxWidth,
+    maxHeight: maxHeight,
   };
 
   return (
     <Link to={``} onClick={handleClick} className="comic-link">
       <div className="comic">
-        <div className="comic-image-container">
+        <div className="comic-image-container" style={style}>
           <img src={image} alt={title} className="comic-image" />
         </div>
         <h2>{title}</h2>
@@ -50,10 +57,8 @@ function Comics({ comics }) {
         <Comic
           key={comic.id}
           {...comic}
-          style={{
-            width: maxWidth,
-            height: maxHeight,
-          }}
+          maxWidth={maxWidth}
+          maxHeight={maxHeight}
         />
       ))}
     </section>
@@ -66,7 +71,9 @@ function AppMain() {
   useEffect(() => {
     const fetchComics = async () => {
       try {
-        const response = await axios.get("https://marvel-api-production.up.railway.app/api/comics");
+        const response = await axios.get(
+          "https://marvel-api-production.up.railway.app/api/comics"
+        );
         const data = response.data.data;
         setComics(data);
       } catch (error) {
