@@ -4,11 +4,12 @@ import './styles.css';
 import Header from '../page/header/index.jsx';
 import ComicContent from '../page/ComicContent/index.jsx';
 import FavoritesButton from '../page/buttons/FavoritesButton.jsx';
-
+import Modal from 'react-modal';
 function ComicDetails() {
   const [comic, setComic] = useState(null);
   const [isFavorite, setIsFavorite] = useState(false);
-
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
   useEffect(() => {
     const fetchComic = async () => {
       const id = localStorage.getItem('id');
@@ -28,6 +29,7 @@ function ComicDetails() {
         setComic(data);
       } catch (error) {
         console.error(error);
+        
         // Manejo de errores
       }
     };
@@ -46,10 +48,25 @@ function ComicDetails() {
         token: localStorage.getItem('token'),
         // Otros datos que necesites enviar al backend
       });
-
+      
+      setModalMessage('Comic agregado a favoritos');
+      setModalIsOpen(true);
       setIsFavorite(true);
     } catch (error) {
-      console.error(error);
+        if (error.response.status === 401) {
+          setModalMessage('Error de autenticación, inicia sesión nuevamente');
+        }
+        else if (error.response.status === 404) {
+          setModalMessage('Comic no encontrado');
+        }
+        else if (error.response.status === 400) {
+          setModalMessage('El comic ya está en favoritos');
+        }
+        else{
+          setModalMessage('Error del servidor');
+        }
+      setModalIsOpen(true);
+      // Manejo de errores
       // Manejo de errores
     }
   };
@@ -58,6 +75,10 @@ function ComicDetails() {
       <Header title="Detalles del cómic" />
       <ComicContent comic={comic} />
       <FavoritesButton  addToFavorites={addToFavorites} isFavorite={isFavorite} />
+      <Modal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)} className="custom-modal">
+        <div>{modalMessage}</div>
+        <button onClick={() => setModalIsOpen(false)}>Cerrar</button>
+      </Modal>
     </div>
   );
 }
