@@ -6,6 +6,7 @@ import AboutUs from './components/Nosotros';
 import Login from './components/Login';
 import Register from './components/Register';
 import Perfil from './components/Perfil';
+import ComicDetails from './components/ComicDetails';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/Login" element={<Login />} />
           <Route path="/AppMain" element={<AppMain />} />
           <Route path="/AboutUs" element={<AboutUs />} />
+          <Route path="/comic/Details" element={<ComicDetails />} />
           <Route path="/Register" element={<Register />} />
           <Route path="/Perfil" element={<Perfil />} />
         </Routes>

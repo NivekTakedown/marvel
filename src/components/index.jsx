@@ -1,16 +1,25 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import "./styles.css";
 
 function Comic({ id, title, image }) {
+  const handleClick = () => {
+    localStorage.setItem('id', id);
+    window.location.href = '/comic/Details';
+  };
   return (
-    <div className="comic">
-      <img src={image} alt={title} />
-      <h2>{title}</h2>
-      <p>{`Comic ID: ${id}`}</p>
-    </div>
+    <Link to={``} onClick={handleClick} className="comic-link">
+      <div className="comic">
+        <img src={image} alt={title} />
+        <h2>{title}</h2>
+        <p>{`Comic ID: ${id}`}</p>
+      </div>
+    </Link>
+
   );
 }
+
 
 function Comics({ comics }) {
   return (

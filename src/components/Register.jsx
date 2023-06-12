@@ -4,12 +4,6 @@ import './styles.css';
 
 function Register() {
   const [nombre, setNombre] = useState('');
-import React, { useState } from 'react';
-import axios from 'axios';
-import './styles.css';
-
-function Register() {
-  const [nombre, setNombre] = useState('');
   const [identificacion, setIdentificacion] = useState('');
   const [email, setEmail] = useState('');
   const [telefono, setTelefono] = useState('');
