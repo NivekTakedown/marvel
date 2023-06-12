@@ -9,6 +9,7 @@ function Comic({ id, title, image }) {
     localStorage.setItem('id', id);
     window.location.href = '/comic/Details';
   };
+
   return (
     <Link to={``} onClick={handleClick} className="comic-link">
       <div className="comic">
@@ -17,10 +18,8 @@ function Comic({ id, title, image }) {
         <p>{`Comic ID: ${id}`}</p>
       </div>
     </Link>
-
   );
 }
-
 
 function Comics({ comics }) {
   return (
