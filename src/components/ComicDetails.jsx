@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'; // Importar archivo CSS personalizado
-import "./styles.css";
+import './styles.css'; // Importar componentes
 import { Link } from 'react-router-dom';
+import Header from '../page/header/index.jsx';
+import ComicContent from '../page/ComicContent/index.jsx';
+import FavoritesButton from '../page/buttons/FavoritesButton.jsx';
 function ComicDetails() {
   const [comic, setComic] = useState(null);
   const [isFavorite, setIsFavorite] = useState(false);
@@ -53,32 +56,9 @@ function ComicDetails() {
 
   return (
     <div>
-      <header>
-        <img src="https://wallpapercave.com/wp/wp2700223.jpg" width="600" height="200" alt="Comic Webpage Logo" />
-        <h1>Registrate</h1>
-        <nav>
-          <ul>
-            <li><Link to="/">Inicio</Link></li>
-            <li><Link to="/appMain">Comics</Link></li>
-            <li><Link to="/AboutUs">Nosotros</Link></li>
-            <li><Link to="/Perfil">Perfil</Link></li>
-          </ul>
-        </nav>
-      </header>
-      <div className="comic-details-container"> {/* Agregar clase CSS al contenedor */}
-        <img src={comic.image} alt={comic.title} style={{ width: '20%' }} /> {/* Ajustar imagen */}
-        <div className="comic-details-content"> {/* Agregar clase CSS al contenido */}
-          <h2>Comic Details</h2>
-          <p>ID: {comic.id}</p>
-          <p>Title: {comic.title}</p>
-          <p>Description: {comic.description}</p>
-          {isFavorite ? (
-            <button disabled>Agregado a favoritos</button>
-          ) : (
-            <button onClick={addToFavorites}>Agregar a favoritos</button>
-          )}
-        </div>
-      </div>
+      <Header title="Detalles del cómic" />
+      <ComicContent comic={comic} />
+      <FavoritesButton isFavorite={isFavorite} addToFavorites={addToFavorites} />
     </div>
   );
 }
