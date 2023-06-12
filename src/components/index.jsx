@@ -15,7 +15,6 @@ function Comic({ id, title, image }) {
       <div className="comic">
         <img src={image} alt={title} />
         <h2>{title}</h2>
-        <p>{`Comic ID: ${id}`}</p>
       </div>
     </Link>
   );

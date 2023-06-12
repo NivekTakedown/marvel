@@ -9,7 +9,6 @@ function ComicContent({ comic }) {
       <img src={comic.image} alt={comic.title} style={{ width: '20%' }} />
       <div className="comic-details-content">
         <h2>Comic Details</h2>
-        <p>ID: {comic.id}</p>
         <p>Title: {comic.title}</p>
         <p>Description: {comic.description}</p>
       </div>
