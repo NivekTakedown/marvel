@@ -61,6 +61,9 @@ function AppMain() {
             <li>
               <a href="/AboutUs">Nosotros</a>
             </li>
+            <li>
+                <a href="/Perfil">Perfil</a>
+             </li>  
           </ul>
         </nav>
       </header>

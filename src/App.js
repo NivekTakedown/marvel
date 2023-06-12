@@ -5,6 +5,7 @@ import ForgotPassword from './components/fp';
 import AboutUs from './components/Nosotros';
 import Login from './components/Login';
 import Register from './components/Register';
+import Perfil from './components/Perfil';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/AppMain" element={<AppMain />} />
           <Route path="/AboutUs" element={<AboutUs />} />
           <Route path="/Register" element={<Register />} />
+          <Route path="/Perfil" element={<Perfil />} />
         </Routes>
       </div>
     </Router>

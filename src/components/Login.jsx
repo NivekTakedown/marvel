@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './styles.css';
+import axios from 'axios';
 
 function Login() {
   const [emailOrPhone, setEmailOrPhone] = useState('');
@@ -10,27 +11,22 @@ function Login() {
     e.preventDefault();
 
     try {
-      const response = await fetch('https://marvel-api-production.up.railway.app/api/user/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
+      const response = await axios.post(
+        `${"https://marvel-api-production.up.railway.app/api/user/login"}`,
+        {
           credenciales: emailOrPhone,
           contrasena: password
-        })
-      });
+        }
+      );
 
-      const data = await response.json();
-
-      if (response.ok) {
-        // Aquí puedes manejar la respuesta exitosa y redireccionar al usuario a la página principal, por ejemplo.
-        console.log('Usuario autenticado exitosamente');
-      } else {
-        // errores de autenticación
-        console.log(data.info);
+      if (response.status === 200) {
+        // guardar el token en el local storage
+        localStorage.setItem('token', response.data.token);
+        // redireccionar a la ruta /appMain
+        window.location.href = '/appMain';
       }
     } catch (error) {
+      console.log(error.response.data);
       console.error(error);
       // errores de conexión con el servidor
     }
