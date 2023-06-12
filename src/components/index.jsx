@@ -35,7 +35,7 @@ function Comics({ comics }) {
         <Comic
           key={comic.id}
           {...comic}
-          imageStyle={{
+          style={{
             width: squareSize,
             height: squareSize,
           }}
