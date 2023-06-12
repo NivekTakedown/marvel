@@ -10,10 +10,8 @@ function Comic({ id, title, image, maxWidth, maxHeight }) {
   };
 
   const comicStyle = {
-    width: `${maxWidth}px`,
-    height: `${maxHeight}px`,
-    minWidth: `${maxWidth}px`,
-    minHeight: `${maxHeight}px`,
+    width: "300px",
+    height: "200px",
     border: "1px solid #ccc",
     marginBottom: "20px",
     display: "flex",
@@ -23,9 +21,11 @@ function Comic({ id, title, image, maxWidth, maxHeight }) {
   };
 
   const imageStyle = {
-    maxWidth: "100%",
-    maxHeight: "100%",
+    width: "100%",
+    height: "100%",
     objectFit: "cover",
+    minWidth: `${maxWidth}px`,
+    minHeight: `${maxHeight}px`,
   };
 
   return (
@@ -97,4 +97,5 @@ function AppMain() {
 }
 
 export default AppMain;
+
 
