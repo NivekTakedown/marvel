@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import "./styles.css";
 import Header from "../page/header/index.jsx";
 
 function Comic({ id, title, image, maxWidth, maxHeight }) {
@@ -10,56 +9,45 @@ function Comic({ id, title, image, maxWidth, maxHeight }) {
     window.location.href = "/comic/Details";
   };
 
-  const style = {
-    width: "auto",
-    height: "auto",
-    maxWidth: maxWidth,
-    maxHeight: maxHeight,
+  const comicStyle = {
+    width: `${maxWidth}px`,
+    height: `${maxHeight}px`,
+    minWidth: `${maxWidth}px`,
+    minHeight: `${maxHeight}px`,
+    border: "1px solid #ccc",
+    marginBottom: "20px",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+  };
+
+  const imageStyle = {
+    maxWidth: "100%",
+    maxHeight: "100%",
+    objectFit: "cover",
   };
 
   return (
     <Link to={``} onClick={handleClick} className="comic-link">
-      <div className="comic">
-        <div className="comic-image-container" style={style}>
-          <img src={image} alt={title} className="comic-image" />
+      <div style={comicStyle} className="comic">
+        <div className="comic-image-container">
+          <img src={image} alt={title} style={imageStyle} className="comic-image" />
         </div>
-        <h2>{title}</h2>
-        <p>{`Comic ID: ${id}`}</p>
+        <div className="comic-details">
+          <h2>{title}</h2>
+          <p>{`Comic ID: ${id}`}</p>
+        </div>
       </div>
     </Link>
   );
 }
 
 function Comics({ comics }) {
-  const [maxWidth, setMaxWidth] = useState(0);
-  const [maxHeight, setMaxHeight] = useState(0);
-
-  useEffect(() => {
-    let maxW = 0;
-    let maxH = 0;
-
-    comics.forEach((comic) => {
-      const img = new Image();
-      img.src = comic.image;
-      img.onload = () => {
-        maxW = Math.max(maxW, img.width);
-        maxH = Math.max(maxH, img.height);
-
-        setMaxWidth(maxW);
-        setMaxHeight(maxH);
-      };
-    });
-  }, [comics]);
-
   return (
     <section className="comics">
       {comics.map((comic) => (
-        <Comic
-          key={comic.id}
-          {...comic}
-          maxWidth={maxWidth}
-          maxHeight={maxHeight}
-        />
+        <Comic key={comic.id} {...comic} />
       ))}
     </section>
   );
@@ -71,9 +59,7 @@ function AppMain() {
   useEffect(() => {
     const fetchComics = async () => {
       try {
-        const response = await axios.get(
-          "https://marvel-api-production.up.railway.app/api/comics"
-        );
+        const response = await axios.get("https://marvel-api-production.up.railway.app/api/comics");
         const data = response.data.data;
         setComics(data);
       } catch (error) {
@@ -111,3 +97,4 @@ function AppMain() {
 }
 
 export default AppMain;
+
