@@ -22,10 +22,24 @@ function Comic({ id, title, image }) {
 }
 
 function Comics({ comics }) {
+  const [squareSize, setSquareSize] = useState(0);
+
+  useEffect(() => {
+    const maxSideLength = Math.max(...comics.map(comic => comic.image.width));
+    setSquareSize(maxSideLength);
+  }, [comics]);
+
   return (
     <section className="comics">
       {comics.map((comic) => (
-        <Comic key={comic.id} {...comic} />
+        <Comic
+          key={comic.id}
+          {...comic}
+          imageStyle={{
+            width: squareSize,
+            height: squareSize,
+          }}
+        />
       ))}
     </section>
   );
