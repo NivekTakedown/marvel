@@ -7,7 +7,6 @@ import Modal from 'react-modal';
 function Login() {
     const [emailOrPhone, setEmailOrPhone] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [modalMessage, setModalMessage] = useState('');
   
