@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';// importa useHistory desde React Router
 import './styles.css';
+import Modal from 'react-modal';
 
 function Register() {
   const [nombre, setNombre] = useState('');
@@ -8,9 +9,8 @@ function Register() {
   const [email, setEmail] = useState('');
   const [telefono, setTelefono] = useState('');
   const [contrasena, setContrasena] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
-
+  const [modalMessage, setModalMessage] = useState('');
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
@@ -27,13 +27,25 @@ function Register() {
       );
 
       if (response.status === 200) {
-        setSuccessMessage('Usuario registrado exitosamente');
-        setErrorMessage('');
+        setModalMessage('Usuario registrado exitosamente');
+        setModalIsOpen(true);
+        setTimeout(() => {
+            //redireccionar a login
+            window.location.href = '/login';
+          }
+          , 5000);
       }
     } catch (error) {
-      console.error(error);
-      setErrorMessage('Error al registrar usuario');
-      setSuccessMessage('');
+      if (error.response.status === 409) {
+        setModalMessage('El usuario ya existe');
+      }
+      else if(error.response.status === 400){
+        setModalMessage('Error en los datos ingresados');
+      }
+      else{
+        setModalMessage('Error del servidor');
+      }
+      setModalIsOpen(true);
     }
   };
 
@@ -82,22 +94,12 @@ function Register() {
           </form>
         </div>
       </div>
+      <Modal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)} className="custom-modal"> {/* Agrega la clase "custom-modal" al modal */}
+        <div>{modalMessage}</div>
+        <button onClick={() => setModalIsOpen(false)}>Cerrar</button>
+      </Modal>
 
-      {successMessage && (
-        <div className="success-register">
-          <h2>Success Register!</h2>
-          <p>{successMessage}</p>
-          <button onClick={() => setSuccessMessage('')}>Close</button>
-        </div>
-      )}
 
-      {errorMessage && (
-        <div className="error-register">
-          <h2>Error!</h2>
-          <p>{errorMessage}</p>
-          <button onClick={() => setErrorMessage('')}>Close</button>
-        </div>
-      )}
     </div>
   );
 }
