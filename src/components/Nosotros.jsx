@@ -1,22 +1,11 @@
 import React from 'react';
 import './styles.css';
-export default AboutUs ;
+import Header from '../page/header/index.jsx';
 
 function AboutUs() {
   return (
     <div>
-      <header>
-        <img src="https://wallpapercave.com/wp/wp2700223.jpg" width="600" height="200" alt="Comic Webpage Logo" />
-        <h1>Conoce más</h1>
-        <nav>
-          <ul>
-            <li><a href="">Inicio</a></li>
-            <li><a href="/appMain">Comics</a></li>
-            <li><a href="/AboutUs">Nosotros</a></li>
-          </ul>
-        </nav>
-      </header>
-
+      <Header title="Acerca de nosotros"/>
       <div className="container">
         <section className="about">
           <h2>About Us</h2>
@@ -34,3 +23,5 @@ function AboutUs() {
     </div>
   );
 }
+
+export default AboutUs ;

@@ -20,10 +20,7 @@ function Header(props) {
                         <Link to="/">Inicio</Link>
                     </li>
                     <li>
-                        <Link to="/comics">Comics</Link>
-                    </li>
-                    <li>
-                        <Link to="/comic/Details">Detalles</Link>
+                        <Link to="/AppMain">Comics</Link>
                     </li>
                     <li>
                         <Link to="/AboutUs">Nosotros</Link>

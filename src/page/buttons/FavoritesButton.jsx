@@ -1,15 +1,15 @@
 import React from 'react';
 import '../../components/styles.css';
-function FavoritesButton({ isFavorite, addToFavorites }) {
+function FavoritesButton({ addToFavorites, isFavorite }) {
     return (
-        <div>
+      <div>
         {isFavorite ? (
-            <button disabled>Agregado a favoritos</button>
+          <button disabled>Agregado a favoritos</button>
         ) : (
-            <button onClick={addToFavorites}>Agregar a favoritos</button>
+          <button onClick={addToFavorites}>Agregar a favoritos</button>
         )}
-        </div>
+      </div>
     );
-}
-
-export default FavoritesButton;
+  }
+  
+  export default FavoritesButton;

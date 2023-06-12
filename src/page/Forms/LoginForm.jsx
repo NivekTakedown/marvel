@@ -25,7 +25,7 @@ function Login() {
   
         if (response.status === 200) {
           // guardar el token en el local storage
-          localStorage.setItem('token', response.data.token);
+          localStorage.setItem('token', response.data.data[0].token);
           //get token from local storage
           // redireccionar a la ruta /appMain
           window.location.href = '/appMain';

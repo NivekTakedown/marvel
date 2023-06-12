@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios'; // Importar archivo CSS personalizado
-import './styles.css'; // Importar componentes
-import { Link } from 'react-router-dom';
+import axios from 'axios';
+import './styles.css';
 import Header from '../page/header/index.jsx';
 import ComicContent from '../page/ComicContent/index.jsx';
 import FavoritesButton from '../page/buttons/FavoritesButton.jsx';
+
 function ComicDetails() {
   const [comic, setComic] = useState(null);
   const [isFavorite, setIsFavorite] = useState(false);
@@ -19,9 +19,9 @@ function ComicDetails() {
 
       try {
         const response = await axios.post(
-          `${"https://marvel-api-production.up.railway.app/api/comics/getComic"}`,
+          'https://marvel-api-production.up.railway.app/api/comics/getComic',
           {
-            "id": id 
+            id: id,
           }
         );
         const data = response.data.data[0];
@@ -35,6 +35,10 @@ function ComicDetails() {
     fetchComic();
   }, []);
 
+  if (!comic) {
+    return <div>Cargando...</div>;
+  }
+  
   const addToFavorites = async () => {
     try {
       const response = await axios.post('https://marvel-api-production.up.railway.app/api/comics/favorite', {
@@ -49,16 +53,11 @@ function ComicDetails() {
       // Manejo de errores
     }
   };
-
-  if (!comic) {
-    return <div>Cargando...</div>;
-  }
-
   return (
     <div>
       <Header title="Detalles del cómic" />
       <ComicContent comic={comic} />
-      <FavoritesButton isFavorite={isFavorite} addToFavorites={addToFavorites} />
+      <FavoritesButton  addToFavorites={addToFavorites} isFavorite={isFavorite} />
     </div>
   );
 }

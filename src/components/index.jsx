@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import "./styles.css";
+import Header from "../page/header/index.jsx";
 
 function Comic({ id, title, image }) {
   const handleClick = () => {
@@ -51,31 +52,7 @@ function AppMain() {
 
   return (
     <div>
-      <header>
-        <img
-          src="https://wallpapercave.com/wp/wp2700223.jpg"
-          width="600"
-          height="200"
-          alt="Comic Webpage Logo"
-        />
-        <h1>Marvel Comics</h1>
-        <nav>
-          <ul>
-            <li>
-              <a href="">Inicio</a>
-            </li>
-            <li>
-              <a href="/appMain">Comics</a>
-            </li>
-            <li>
-              <a href="/AboutUs">Nosotros</a>
-            </li>
-            <li>
-                <a href="/Perfil">Perfil</a>
-             </li>  
-          </ul>
-        </nav>
-      </header>
+      <Header title="Marvel comics" />
       <Comics comics={comics} />
       <section className="contact">
         <h2>Get in Touch</h2>
