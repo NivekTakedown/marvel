@@ -1,5 +1,6 @@
 import React from 'react';
 import './styles.css';
+import { Link } from "react-router-dom";
 
 function Perfil() {
   return (
@@ -9,10 +10,10 @@ function Perfil() {
         <h1>Marvel Comics</h1>
         <nav>
           <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="comics.html">Comics</a></li>
-            <li><a href="Nosotros.html">About</a></li>
-            <li><a href="perfil.html">Perfil</a></li>
+            <li><Link to="/">Inicio</Link></li>
+            <li><Link to="/appMain">Comics</Link></li>
+            <li><Link to="/AboutUs">Nosotros</Link></li>
+            <li><Link to="/Perfil">Perfil</Link></li>
           </ul>
         </nav>
       </header>
