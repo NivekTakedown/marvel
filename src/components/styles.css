@@ -332,7 +332,6 @@ a:hover {
 
 .custom-modal button:hover {
   background-color: #005b9f;
-  transform: scale(1.1);
 }
 
 .comic-details-container {
@@ -352,24 +351,19 @@ a:hover {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
   max-width: 800px;
   background-color: #f7f7f7;
-  border: 1px solid #ccc;
 }
 
 .comic-details-content h2 {
-  font-size: 48px;
+  font-size: 36px;
   margin-bottom: 30px;
   color: #ffffff;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
-  background: linear-gradient(to right, #0077c2, #003d6b);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 
 .comic-details-content p {
   font-size: 24px;
   margin-bottom: 20px;
   color: #555;
-  line-height: 1.5;
 }
 
 .comic-details-content button {
@@ -381,9 +375,6 @@ a:hover {
   color: #fff;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 
 .comic-details-content button:hover {
