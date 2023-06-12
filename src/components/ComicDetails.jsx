@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'; // Importar archivo CSS personalizado
-
+import "./styles.css";
 function ComicDetails() {
   const [comic, setComic] = useState(null);
   const [isFavorite, setIsFavorite] = useState(false);
@@ -15,7 +15,7 @@ function ComicDetails() {
 
       try {
         const response = await axios.post(
-          `${"http://localhost:3000/api/comics/getComic"}`,
+          `${"https://marvel-api-production.up.railway.app/api/comics/getComic"}`,
           {
             "id": id 
           }
