@@ -27,8 +27,55 @@ function ComicDetails() {
         const data = response.data.data[0];
         setComic(data);
       } catch (error) {
-        console.error(error);
+        if (error.response.status === 404) {
+          setModalMessage('Comic no encontrado');
+          setModalIsOpen(true);
+          //esperar 5 segundos
+          setTimeout(() => {
+            //redireccionar a login
+            window.location.href = '/ AppMain';
+          }
+          , 5000);
+        }
+        else{
+          setModalMessage('Error del servidor');
+        }
+        setModalIsOpen(true);
         
+        // Manejo de errores
+      }
+      try {
+        let response = await axios.post(
+          'https://marvel-api-production.up.railway.app/api/comics/isFavorite',
+          {
+            comicId: id,
+            token: localStorage.getItem('token'),
+          }
+        );
+        setIsFavorite(response.data.data[0].isFavorite);
+
+      } catch (error) {
+        if(error.response===undefined){
+          setModalMessage('Error del servidor');
+        }
+        else if (error.response.status === 401) {
+          setModalMessage('No se pudo verificar si el comic está en favoritos, inicia sesión nuevamente');
+          setModalIsOpen(true);
+          //esperar 5 segundos
+          setTimeout(() => {
+            //redireccionar a login
+            window.location.href = '/login';
+          }
+          , 5000);
+        }
+        else if (error.response.status === 404) {
+          setModalMessage('Comic no encontrado');
+        }
+        else{
+          setModalMessage('Error del servidor');
+        }
+        setIsFavorite(false);
+        setModalIsOpen(true);
         // Manejo de errores
       }
     };
@@ -54,6 +101,12 @@ function ComicDetails() {
     } catch (error) {
         if (error.response.status === 401) {
           setModalMessage('Error de autenticación, inicia sesión nuevamente');
+          setModalIsOpen(true);
+          setTimeout(() => {
+            //redireccionar a login
+            window.location.href = '/login';
+          }
+          , 5000);
         }
         else if (error.response.status === 404) {
           setModalMessage('Comic no encontrado');
@@ -69,10 +122,43 @@ function ComicDetails() {
       // Manejo de errores
     }
   };
+  const removeFromFavorites = async () => {
+    try {
+      const request={
+        comicId: comic.id,
+        token: localStorage.getItem('token'),
+      };
+      const response = await axios.post("https://marvel-api-production.up.railway.app/api/comics/DeleteFavorite", request);
+      setModalMessage('Comic eliminado de favoritos');
+      setModalIsOpen(true);
+      setIsFavorite(false);
+    } catch (error) {
+        if (error.response.status === 401) {
+          setModalMessage('Error de autenticación, inicia sesión nuevamente');
+          setModalIsOpen(true);
+          setTimeout(() => {
+            //redireccionar a login
+            window.location.href = '/login';
+          }
+          , 5000);
+        }
+        else if (error.response.status === 404) {
+          setModalMessage('Comic no encontrado');
+        }
+        else if (error.response.status === 400) {
+          setModalMessage('El comic no está en favoritos');
+        }
+        else{
+          setModalMessage('Error del servidor');
+        }
+      setModalIsOpen(true);
+      // Manejo de errores
+    }
+  };
   return (
     <div>
       <Header title="Detalles del cómic" />
-      <ComicContent comic={comic} addToFavorites={addToFavorites} isFavorite={isFavorite} />
+      <ComicContent comic={comic} addToFavorites={addToFavorites} isFavorite={isFavorite} removeFromFavorites={removeFromFavorites} />
       <Modal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)} className="custom-modal">
         <div>{modalMessage}</div>
         <button onClick={() => setModalIsOpen(false)}>Cerrar</button>
