@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './styles.css';
-import Modal from 'react-modal';
 
 function DeleteUser() {
   const [credenciales, setcredenciales] = useState('');
   const [contrasena, setContrasena] = useState('');
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [modalMessage, setModalMessage] = useState('');
 
   const handleDeleteUser = async (e) => {
     e.preventDefault();
@@ -18,30 +15,10 @@ function DeleteUser() {
         contrasena,
         token: localStorage.getItem('token'),
       });
-      if(response.status === 200){
-      setModalMessage('Usuario eliminado exitosamente')
-      setModalIsOpen(true);
-      localStorage.removeItem('token');
-      setTimeout(() => {
-        //redireccionar a login
-        window.location.href = '/appMain';
-      }
-      , 5000);
-      }
-
+      console.log(response.data); 
     } catch (error) {
       console.error(error); // Manejo de errores
-    if (error.response.status === 400) {
-        setModalMessage('Logueate primero');
-      }
-    if (error.response.status === 401) {
-      setModalMessage('Credenciales incorrectas');
     }
-    else if (error.response.status === 401) {
-      setModalMessage('Usuario no encontrado');
-    }
-    setModalIsOpen(true);
-  }
   };
 
   return (
@@ -55,7 +32,6 @@ function DeleteUser() {
             <li><a href="/">Inicio</a></li>
             <li><a href="comics">Comics</a></li>
             <li><a href="Nosotros">Nosotros</a></li>
-            <li><a href="perfil">Perfil</a></li>
           </ul>
         </nav>
       </header>
@@ -67,7 +43,7 @@ function DeleteUser() {
           <form onSubmit={handleDeleteUser}>
             <div className="row">
               <i className="fas fa-envelope"></i>
-              <input type="text" placeholder="credenciales" value={credenciales} onChange={(e) => setcredenciales(e.target.value)} required />
+              <input type="email" placeholder="Email" value={credenciales} onChange={(e) => setcredenciales(e.target.value)} required />
             </div>
             <div className="row">
               <i className="fas fa-lock"></i>
@@ -79,10 +55,6 @@ function DeleteUser() {
             <div className="signup-link">¿No deseas eliminarte? <a href="perfil">Regresa</a></div>
           </form>
         </div>
-        <Modal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)} className="custom-modal"> {/* Agrega la clase "custom-modal" al modal */}
-        <div>{modalMessage}</div>
-        <button onClick={() => setModalIsOpen(false)}>Cerrar</button>
-      </Modal>
       </div>
     </div>
   );

@@ -7,7 +7,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Perfil from './components/Perfil';
 import ComicDetails from './components/ComicDetails';
-
+import DeleteUser from './components/DeleteUser';
 function App() {
   return (
     <Router>
@@ -16,6 +16,7 @@ function App() {
           <Route exact path="/" element={<Login />} />
           <Route path="/ForgotPassword" element={<ForgotPassword />} />
           <Route path="/Login" element={<Login />} />
+          <Route path='/DeleteUser' element ={<DeleteUser />} />
           <Route path="/AppMain" element={<AppMain />} />
           <Route path="/AboutUs" element={<AboutUs />} />
           <Route path="/comic/Details" element={<ComicDetails />} />
