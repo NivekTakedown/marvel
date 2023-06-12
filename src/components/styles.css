@@ -329,6 +329,7 @@ a:hover {
 }
 
 /* Comic Details Styles */
+
 .custom-modal button:hover {
   background-color: #005b9f;
 }
@@ -349,7 +350,7 @@ a:hover {
   border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   max-width: 600px;
-  background-color: #f9f9f9;
+  background-color: #fff8f8;
 }
 
 .comic-details-content h2 {
