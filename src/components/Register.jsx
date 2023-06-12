@@ -4,11 +4,18 @@ import './styles.css';
 
 function Register() {
   const [nombre, setNombre] = useState('');
+import React, { useState } from 'react';
+import axios from 'axios';
+import './styles.css';
+
+function Register() {
+  const [nombre, setNombre] = useState('');
   const [identificacion, setIdentificacion] = useState('');
   const [email, setEmail] = useState('');
   const [telefono, setTelefono] = useState('');
   const [contrasena, setContrasena] = useState('');
-  const [message, setMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -24,14 +31,15 @@ function Register() {
           contrasena,
         }
       );
-      console.log(response);
-      if (response.status === 200) { // verifica si la respuesta es 200
-        //pop up de registro exitoso
-        console.log('Usuario registrado exitosamente');
-       }
+
+      if (response.status === 200) {
+        setSuccessMessage('Usuario registrado exitosamente');
+        setErrorMessage('');
+      }
     } catch (error) {
       console.error(error);
-      console.log('Error al registrar usuario');
+      setErrorMessage('Error al registrar usuario');
+      setSuccessMessage('');
     }
   };
 
@@ -80,9 +88,25 @@ function Register() {
           </form>
         </div>
       </div>
-      <p>{message}</p>
+
+      {successMessage && (
+        <div className="success-register">
+          <h2>Success Register!</h2>
+          <p>{successMessage}</p>
+          <button onClick={() => setSuccessMessage('')}>Close</button>
+        </div>
+      )}
+
+      {errorMessage && (
+        <div className="error-register">
+          <h2>Error!</h2>
+          <p>{errorMessage}</p>
+          <button onClick={() => setErrorMessage('')}>Close</button>
+        </div>
+      )}
     </div>
   );
 }
 
 export default Register;
+
