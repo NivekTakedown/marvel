@@ -13,19 +13,35 @@ function Comic({ id, title, image }) {
   return (
     <Link to={``} onClick={handleClick} className="comic-link">
       <div className="comic">
-        <img src={image} alt={title} />
+        <div className="comic-image-container">
+          <img src={image} alt={title} className="comic-image" />
+        </div>
         <h2>{title}</h2>
+        <p>{`Comic ID: ${id}`}</p>
       </div>
     </Link>
   );
 }
 
 function Comics({ comics }) {
-  const [squareSize, setSquareSize] = useState(0);
+  const [maxWidth, setMaxWidth] = useState(0);
+  const [maxHeight, setMaxHeight] = useState(0);
 
   useEffect(() => {
-    const maxSideLength = Math.max(...comics.map(comic => comic.image.width));
-    setSquareSize(maxSideLength);
+    let maxW = 0;
+    let maxH = 0;
+
+    comics.forEach((comic) => {
+      const img = new Image();
+      img.src = comic.image;
+      img.onload = () => {
+        maxW = Math.max(maxW, img.width);
+        maxH = Math.max(maxH, img.height);
+
+        setMaxWidth(maxW);
+        setMaxHeight(maxH);
+      };
+    });
   }, [comics]);
 
   return (
@@ -35,8 +51,8 @@ function Comics({ comics }) {
           key={comic.id}
           {...comic}
           style={{
-            width: squareSize * 0.05,
-            height: squareSize * 0.1,
+            width: maxWidth,
+            height: maxHeight,
           }}
         />
       ))}
@@ -55,7 +71,7 @@ function AppMain() {
         setComics(data);
       } catch (error) {
         console.error(error);
-        // Manejo de errores
+        // Error handling
       }
     };
 
