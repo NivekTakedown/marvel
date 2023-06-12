@@ -21,11 +21,9 @@ function Comic({ id, title, image, maxWidth, maxHeight }) {
   };
 
   const imageStyle = {
-    width: "100%",
-    height: "100%",
+    maxWidth: "100%",
+    maxHeight: "100%",
     objectFit: "cover",
-    minWidth: `${maxWidth}px`,
-    minHeight: `${maxHeight}px`,
   };
 
   return (
@@ -97,5 +95,3 @@ function AppMain() {
 }
 
 export default AppMain;
-
-
