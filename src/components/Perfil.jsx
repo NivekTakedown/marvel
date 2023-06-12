@@ -69,9 +69,12 @@ function Perfil() {
       const response = await axios.post('https://marvel-api-production.up.railway.app/api/user/logout', {
         token: localStorage.getItem('token'),
       });
-      console.log(response.data); // Manejo de la respuesta exitosa
-      // Realizar cualquier otra acción necesaria después del logout (redireccionar, limpiar el estado, etc.)
-    } catch (error) {
+      if (response.status === 200) {
+      console.log(response.data);
+      localStorage.removeItem('token');
+      window.location.href = '/';
+
+    }} catch (error) {
       console.error(error); // Manejo de errores
     }
   };
