@@ -18,14 +18,14 @@ function ComicDetails() {
       }
 
       try {
-        const response = await axios.post(
+        let response = await axios.post(
           'https://marvel-api-production.up.railway.app/api/comics/getComic',
           {
             id: id,
           }
         );
-        const data = response.data.data[0];
-        setComic(data);
+        response = response.data.data[0];
+        setComic(response);
       } catch (error) {
         if (error.response.status === 404) {
           setModalMessage('Comic no encontrado');

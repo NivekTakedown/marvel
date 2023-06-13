@@ -1,21 +1,14 @@
 import React from 'react';
 import './styles.css';
-export default ForgotPassword ;
+import Header from '../page/header/index.jsx';
+
+
+
 
 function ForgotPassword() {
   return (
     <div>
-      <header>
-        <img src="https://wallpapercave.com/wp/wp2700223.jpg" width="600" height="200" alt="Comic Webpage Logo" />
-        <h1>Registrate</h1>
-        <nav>
-          <ul>
-            <li><a href="">Inicio</a></li>
-            <li><a href="appMain">Comics</a></li>
-            <li><a href="AboutUs">Nosotros</a></li>
-          </ul>
-        </nav>
-      </header>
+      <Header title="Registrate"/>
 
       <div className="container">
         <div className="wrapper">
@@ -39,3 +32,4 @@ function ForgotPassword() {
     </div>
   );
 }
+export default ForgotPassword ;
