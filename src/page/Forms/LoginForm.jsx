@@ -27,7 +27,7 @@ function Login() {
           localStorage.setItem('token', response.data.data[0].token);
           //get token from local storage
           // redireccionar a la ruta /appMain
-          window.location.href = '/appMain';
+          window.location.href = '/AppMain';
         }
       } catch (error) {
         console.log(error.response.status);
