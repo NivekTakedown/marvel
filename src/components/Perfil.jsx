@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './styles.css';
 import { Link } from 'react-router-dom';
-
+import Header from '../page/header';
  // Supongo que tienes un componente llamado Comics para mostrar la lista de cómics
 
  function Comic({ id, title, image }) {
@@ -81,18 +81,7 @@ function Perfil() {
 
   return (
     <div>
-      <header>
-        <img src="https://wallpapercave.com/wp/wp2700223.jpg" width="600" height="200" alt="Comic Webpage Logo" />
-        <h1>Marvel Comics</h1>
-        <nav>
-          <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="AppMain">Comics</a></li>
-            <li><a href="AboutUs">About</a></li>
-            <li><a href="Perfil">Perfil</a></li>
-          </ul>
-        </nav>
-      </header>
+      <Header title="Favoritos"/>
       <body id="hey">
         <h2 style={{ textAlign: 'center', color: 'white' }}>User Profile Card</h2>
         <div className="container">

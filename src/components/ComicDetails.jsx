@@ -45,6 +45,10 @@ function ComicDetails() {
         // Manejo de errores
       }
       try {
+        if(!localStorage.getItem('token')){
+          setIsFavorite(false);
+          return;
+        }
         let response = await axios.post(
           'https://marvel-api-production.up.railway.app/api/comics/isFavorite',
           {
@@ -59,7 +63,7 @@ function ComicDetails() {
           setModalMessage('Error del servidor');
         }
         else if (error.response.status === 401) {
-          setModalMessage('No se pudo verificar si el comic está en favoritos, inicia sesión nuevamente');
+          setModalMessage('No se pudo verificar si el comic está en favoritos, inicia sesión');
           setModalIsOpen(true);
           //esperar 5 segundos
           setTimeout(() => {

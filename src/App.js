@@ -7,7 +7,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Perfil from './components/Perfil';
 import ComicDetails from './components/ComicDetails';
-import DeleteUser from './components/deleteuser';
+import DeleteUser from './components/DeleteUser';
 
 function App() {
   return (
