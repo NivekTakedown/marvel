@@ -3,16 +3,17 @@ import { Link } from 'react-router-dom';
 import '../../components/styles.css'; // Importa tu archivo CSS personalizado aquí
 import axios from 'axios';
 import Modal from 'react-modal';
+import { useNavigate } from "react-router-dom";
 
 function Login() {
     const [emailOrPhone, setEmailOrPhone] = useState('');
     const [password, setPassword] = useState('');
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [modalMessage, setModalMessage] = useState('');
-  
+    const navigate = useNavigate();
     const handleLogin = async (e) => {
       e.preventDefault();
-  
+      
       try {
         const response = await axios.post(
           `${"https://marvel-api-production.up.railway.app/api/user/login"}`,
@@ -27,7 +28,7 @@ function Login() {
           localStorage.setItem('token', response.data.data[0].token);
           //get token from local storage
           // redireccionar a la ruta /appMain
-          window.location.href = '/AppMain';
+          navigate('/AppMain');
         }
       } catch (error) {
         console.log(error.response.status);

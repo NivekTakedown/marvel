@@ -3,12 +3,14 @@ import axios from 'axios';
 import './styles.css';
 import Modal from 'react-modal';
 import Header from '../page/header';
+import { useNavigate  } from 'react-router-dom';
 
 function DeleteUser() {
   const [credenciales, setcredenciales] = useState('');
   const [contrasena, setContrasena] = useState('');
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleDeleteUser = async (e) => {
     e.preventDefault();
@@ -25,7 +27,7 @@ function DeleteUser() {
       localStorage.removeItem('token');
       setTimeout(() => {
         //redireccionar a login
-        window.location.href = '/appMain';
+        navigate('/AppMain');
       }
       , 5000);
       }

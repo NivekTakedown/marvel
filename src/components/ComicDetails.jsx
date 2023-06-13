@@ -4,15 +4,17 @@ import './styles.css';
 import Header from '../page/header/index.jsx';
 import ComicContent from '../page/ComicContent/index.jsx';
 import Modal from 'react-modal';
-
+import { useNavigate } from "react-router-dom";
 function ComicDetails() {
   const [comic, setComic] = useState(null);
   const [isFavorite, setIsFavorite] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchComic = async () => {
+      
       const id = localStorage.getItem('id');
       if (!id) {
         console.error('ID no encontrado en el almacenamiento local');
@@ -35,7 +37,7 @@ function ComicDetails() {
           //esperar 5 segundos
           setTimeout(() => {
             //redireccionar a login
-            window.location.href = '/ AppMain';
+            navigate('/AppMain');
           }, 5000);
         } else {
           setModalMessage('Error del servidor');
@@ -68,7 +70,7 @@ function ComicDetails() {
           //esperar 5 segundos
           setTimeout(() => {
             //redireccionar a login
-            window.location.href = '/login';
+            navigate('/login');
           }, 5000);
         } else if (error.response.status === 404) {
           setModalMessage('Comic no encontrado');
@@ -81,7 +83,7 @@ function ComicDetails() {
     };
 
     fetchComic();
-  }, []);
+  }, [navigate]);
 
   if (!comic) {
     return <div>Cargando...</div>;
@@ -110,7 +112,7 @@ function ComicDetails() {
         setModalIsOpen(true);
         setTimeout(() => {
           //redireccionar a login
-          window.location.href = '/login';
+          navigate('/login');
         }, 5000);
       } else if (error.response.status === 404) {
         setModalMessage('Comic no encontrado');
@@ -144,7 +146,7 @@ function ComicDetails() {
         setModalIsOpen(true);
         setTimeout(() => {
           //redireccionar a login
-          window.location.href = '/login';
+          navigate('/login');
         }, 5000);
       } else if (error.response.status === 404) {
         setModalMessage('Comic no encontrado');

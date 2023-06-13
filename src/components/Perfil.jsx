@@ -3,16 +3,18 @@ import axios from 'axios';
 import './styles.css';
 import { Link } from 'react-router-dom';
 import Header from '../page/header';
+import { useNavigate } from 'react-router-dom';
  // Supongo que tienes un componente llamado Comics para mostrar la lista de cómics
 
  function Comic({ id, title, image }) {
+  const navigate = useNavigate();
   const handleClick = () => {
     localStorage.setItem('id', id);
-    window.location.href = '/comic/Details';
+    navigate('/comic/Details');
   };
 
   return (
-    <Link to={``} onClick={handleClick} className="comic-link">
+    <Link to={`/comic/Details`} onClick={handleClick} className="comic-link">
       <div className="comic">
         <img src={image} alt={title} />
         <h2>{title}</h2>
@@ -63,8 +65,9 @@ function Perfil() {
   };
   handleFetchFavoriteComics();
 }, []);
-
+const navigate = useNavigate();
   const handleLogout = async () => {
+   
     try {
       const response = await axios.post('https://marvel-api-production.up.railway.app/api/user/logout', {
         token: localStorage.getItem('token'),
@@ -72,7 +75,7 @@ function Perfil() {
       if (response.status === 200) {
       console.log(response.data);
       localStorage.removeItem('token');
-      window.location.href = '/';
+      navigate('/');
 
     }} catch (error) {
       console.error(error); // Manejo de errores

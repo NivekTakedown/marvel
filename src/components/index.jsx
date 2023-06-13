@@ -3,11 +3,13 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import "./styles.css";
 import Header from "../page/header/index.jsx";
+import { useNavigate } from "react-router-dom";
 
 function Comic({ id, title, image, maxWidth, maxHeight }) {
+  const navigate = useNavigate();
   const handleClick = () => {
     localStorage.setItem("id", id);
-    window.location.href = "/comic/Details";
+    navigate('/comic/Details');
   };
 
   const style = {
@@ -18,7 +20,7 @@ function Comic({ id, title, image, maxWidth, maxHeight }) {
   };
 
   return (
-    <Link to={``} onClick={handleClick} className="comic-link">
+    <Link to={`/comic/Details`} onClick={handleClick} className="comic-link">
       <div className="comic">
         <div className="comic-image-container" style={style}>
           <img src={image} alt={title} className="comic-image" />

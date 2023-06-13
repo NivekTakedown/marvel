@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';// importa useHistory desde React Router
 import './styles.css';
 import Modal from 'react-modal';
-
+import { useNavigate } from "react-router-dom";
 function Register() {
   const [nombre, setNombre] = useState('');
   const [identificacion, setIdentificacion] = useState('');
@@ -11,6 +11,7 @@ function Register() {
   const [contrasena, setContrasena] = useState('');
   const [modalMessage, setModalMessage] = useState('');
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const navigate = useNavigate();
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
@@ -31,7 +32,7 @@ function Register() {
         setModalIsOpen(true);
         setTimeout(() => {
             //redireccionar a login
-            window.location.href = '/login';
+            navigate('/login');
           }
           , 5000);
       }
