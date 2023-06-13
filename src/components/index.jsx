@@ -4,28 +4,51 @@ import { Link } from "react-router-dom";
 import "./styles.css";
 import Header from "../page/header/index.jsx";
 
-function Comic({ id, title, image }) {
+function Comic({ id, title, image, maxWidth, maxHeight }) {
   const handleClick = () => {
-    localStorage.setItem('id', id);
-    window.location.href = '/comic/Details';
+    localStorage.setItem("id", id);
+    window.location.href = "/comic/Details";
+  };
+
+  const style = {
+    width: "auto",
+    height: "auto",
+    maxWidth: maxWidth,
+    maxHeight: maxHeight,
   };
 
   return (
     <Link to={``} onClick={handleClick} className="comic-link">
       <div className="comic">
-        <img src={image} alt={title} />
+        <div className="comic-image-container" style={style}>
+          <img src={image} alt={title} className="comic-image" />
+        </div>
         <h2>{title}</h2>
+        <p>{`Comic ID: ${id}`}</p>
       </div>
     </Link>
   );
 }
 
 function Comics({ comics }) {
-  const [squareSize, setSquareSize] = useState(0);
+  const [maxWidth, setMaxWidth] = useState(0);
+  const [maxHeight, setMaxHeight] = useState(0);
 
   useEffect(() => {
-    const maxSideLength = Math.max(...comics.map(comic => comic.image.width));
-    setSquareSize(maxSideLength);
+    let maxW = 0;
+    let maxH = 0;
+
+    comics.forEach((comic) => {
+      const img = new Image();
+      img.src = comic.image;
+      img.onload = () => {
+        maxW = Math.max(maxW, img.width);
+        maxH = Math.max(maxH, img.height);
+
+        setMaxWidth(maxW);
+        setMaxHeight(maxH);
+      };
+    });
   }, [comics]);
 
   return (
@@ -34,10 +57,8 @@ function Comics({ comics }) {
         <Comic
           key={comic.id}
           {...comic}
-          style={{
-            width: squareSize * 0.05,
-            height: squareSize * 0.1,
-          }}
+          maxWidth={maxWidth}
+          maxHeight={maxHeight}
         />
       ))}
     </section>
@@ -50,12 +71,14 @@ function AppMain() {
   useEffect(() => {
     const fetchComics = async () => {
       try {
-        const response = await axios.get("https://marvel-api-production.up.railway.app/api/comics");
+        const response = await axios.get(
+          "https://marvel-api-production.up.railway.app/api/comics"
+        );
         const data = response.data.data;
         setComics(data);
       } catch (error) {
         console.error(error);
-        // Manejo de errores
+        // Error handling
       }
     };
 
