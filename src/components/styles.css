@@ -95,6 +95,7 @@ header {
   padding: 20px;
   color: #ffffff;
   text-align: center;
+  height: auto;
 }
 
 header h1 {
@@ -122,6 +123,7 @@ nav ul li a {
   color: #ffffff;
   text-decoration: none;
 }
+
 .nav-link {
   display: inline-block;
   padding: 10px 20px;
@@ -135,6 +137,41 @@ nav ul li a {
 .nav-link:hover {
   background-color: #b80f0f;
 }
+
+/* Media Queries */
+@media only screen and (max-width: 768px) {
+  header h1 {
+    font-size: 50px;
+  }
+  
+  nav ul li {
+    display: block;
+    margin: 10px 0;
+  }
+  
+  .nav-link {
+    display: block;
+    padding: 10px;
+    text-align: center;
+  }
+}
+/* Media Queries */
+@media only screen and (max-width: 768px) {
+  header h1 {
+    font-size: 50px;
+  }
+  
+  nav ul li {
+    display: block;
+    margin: 10px 0;
+  }
+  
+  .nav-link {
+    display: block;
+    padding: 10px;
+    text-align: center;
+  }
+} 
 
 /* Comics Section Styles */
 section.comics {
@@ -340,7 +377,6 @@ a:hover {
   margin-top: 20px;
   padding: 10px 20px;
 }
-
 /* Comic Details Styles */
 
 .custom-modal button:hover {
@@ -422,4 +458,58 @@ a:hover {
 .comic-details-content .info span {
   font-size: 18px;
   color: #555;
+}
+
+/* Media Queries */
+
+@media screen and (max-width: 768px) {
+  .comic-details-content h2 {
+    font-size: 28px;
+    padding: 10px 15px;
+  }
+
+  .comic-details-content p {
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+
+  .comic-details-content button {
+    font-size: 20px;
+    padding: 12px 24px;
+  }
+
+  .comic-details-content .info label {
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+
+  .comic-details-content .info span {
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .comic-details-content h2 {
+    font-size: 24px;
+    padding: 8px 12px;
+  }
+
+  .comic-details-content p {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  .comic-details-content button {
+    font-size: 18px;
+    padding: 10px 20px;
+  }
+
+  .comic-details-content .info label {
+    font-size: 16px;
+    margin-bottom: 6px;
+  }
+
+  .comic-details-content .info span {
+    font-size: 14px;
+  }
 }

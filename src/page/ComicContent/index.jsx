@@ -9,7 +9,7 @@ function ComicContent({ comic, addToFavorites, isFavorite , removeFromFavorites}
   return (
     <div className="comic-details-container">
       <div className="comic-details-image">
-        <img src={comic.image} alt={comic.title} />
+        <img src={comic.image} alt={comic.title} style={{ width: "100%", height: "auto" }} />
       </div>
       <div className="comic-details-content">
         <h2>{comic.title}</h2>

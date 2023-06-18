@@ -25,27 +25,25 @@ function Header(props) {
     }
     return (
         <header>
-            <img
+          <img
             src="https://wallpapercave.com/wp/wp2700223.jpg"
-            width="600"
-            height="200"
             alt="Comic Webpage Logo"
-            />
-            <h1>{props.title}</h1>
-            <nav>
+            style={{ maxWidth: "60%", height: "auto" }}
+          />
+          <h1>{props.title}</h1>
+          <nav>
             <ul>
-                {navLinks
-                .map((link) => (
-                    <li key={link.to}>
-                    <Link to={link.to} className="nav-link">
-                        {link.text}
-                    </Link>
-                    </li>
-                ))}
+              {navLinks.map((link) => (
+                <li key={link.to}>
+                  <Link to={link.to} className="nav-link">
+                    {link.text}
+                  </Link>
+                </li>
+              ))}
             </ul>
-            </nav>
+          </nav>
         </header>
-        );
+      );
 }
 
 export default Header;
