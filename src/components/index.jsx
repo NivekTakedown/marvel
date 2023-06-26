@@ -26,7 +26,6 @@ function Comic({ id, title, image, maxWidth, maxHeight }) {
           <img src={image} alt={title} className="comic-image" />
         </div>
         <h2>{title}</h2>
-        <p>{`Comic ID: ${id}`}</p>
       </div>
     </Link>
   );

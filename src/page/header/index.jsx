@@ -17,7 +17,6 @@ function Header(props) {
     }
     else{
         navLinks = [
-            { to: '/', text: 'Inicio' },
             { to: '/AppMain', text: 'Comics' },
             { to: '/AboutUs', text: 'Nosotros' },
             { to: '/Perfil', text: 'Perfil' }
