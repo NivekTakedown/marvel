@@ -39,13 +39,12 @@ function Comics({ comics }) {
     let maxW = 0;
     let maxH = 0;
 
-    comics.forEach((comic) => {
+    comics.forEach((node) => {
       const img = new Image();
-      img.src = comic.image;
+      img.src = node.node.main_picture.large;
       img.onload = () => {
         maxW = Math.max(maxW, img.width);
         maxH = Math.max(maxH, img.height);
-
         setMaxWidth(maxW);
         setMaxHeight(maxH);
       };
@@ -54,13 +53,15 @@ function Comics({ comics }) {
 
   return (
     <section className="comics">
-      {comics.map((comic) => (
+      {comics.map((node) => (
         <Comic
-          key={comic.id}
-          {...comic}
-          maxWidth={maxWidth}
-          maxHeight={maxHeight}
-        />
+        key={node.node.id}
+        id={node.node.id}
+        title={node.node.title}
+        image={node.node.main_picture.large}
+        maxWidth={maxWidth}
+        maxHeight={maxHeight}
+      />
       ))}
     </section>
   );
@@ -73,7 +74,7 @@ function AppMain() {
     const fetchComics = async () => {
       try {
         const response = await axios.get(
-          "https://marvel-api-production.up.railway.app/api/comics"
+          "http://localhost:3000/api/comics/anime"
         );
         const data = response.data.data;
         setComics(data);

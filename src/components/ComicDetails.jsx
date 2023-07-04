@@ -5,6 +5,7 @@ import Header from '../page/header/index.jsx';
 import ComicContent from '../page/ComicContent/index.jsx';
 import Modal from 'react-modal';
 import { useNavigate } from "react-router-dom";
+
 function ComicDetails() {
   const [comic, setComic] = useState(null);
   const [isFavorite, setIsFavorite] = useState(false);
@@ -23,13 +24,14 @@ function ComicDetails() {
 
       try {
         let response = await axios.post(
-          'https://marvel-api-production.up.railway.app/api/comics/getComic',
+          'http://localhost:3000/api/comics/getAnime',
           {
-            id: id,
+            id: id
           }
         );
-        response = response.data.data[0];
+        response = response.data.data;
         setComic(response);
+        localStorage.setItem("anime", response);
       } catch (error) {
         if (error.response.status === 404) {
           setModalMessage('Comic no encontrado');
@@ -52,7 +54,7 @@ function ComicDetails() {
         }
 
         let response = await axios.post(
-          'https://marvel-api-production.up.railway.app/api/comics/isFavorite',
+          'http://localhost:3000/api/comics/isFavorite',
           {
             comicId: id,
             token: localStorage.getItem('token'),
@@ -92,7 +94,7 @@ function ComicDetails() {
   const addToFavorites = async () => {
     try {
       const response = await axios.post(
-        'https://marvel-api-production.up.railway.app/api/comics/favorite',
+        'http://localhost:3000/api/comics/favorite',
         {
           comicId: comic.id,
           token: localStorage.getItem('token'),
@@ -132,7 +134,7 @@ function ComicDetails() {
         token: localStorage.getItem('token'),
       };
       const response = await axios.post(
-        'https://marvel-api-production.up.railway.app/api/comics/DeleteFavorite',
+        'http://localhost:3000/api/comics/DeleteFavorite',
         request
       );
       if (response!==undefined ) {
