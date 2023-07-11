@@ -23,11 +23,8 @@ function ComicDetails() {
       }
 
       try {
-        let response = await axios.post(
-          'http://localhost:3000/api/comics/getAnime',
-          {
-            id: id
-          }
+        let response = await axios.get(
+          `http://localhost:3000/api/comics/getAnime/${id}`
         );
         response = response.data.data;
         setComic(response);
@@ -53,12 +50,8 @@ function ComicDetails() {
           return;
         }
 
-        let response = await axios.post(
-          'http://localhost:3000/api/comics/isFavorite',
-          {
-            comicId: id,
-            token: localStorage.getItem('token'),
-          }
+        let response = await axios.get(
+          `http://localhost:3000/api/comics/isFavorite/${id}/${localStorage.getItem('token')}`,
         );
         setIsFavorite(response.data.data[0].isFavorite);
       } catch (error) {
@@ -129,13 +122,8 @@ function ComicDetails() {
 
   const removeFromFavorites = async () => {
     try {
-      const request = {
-        comicId: comic.id,
-        token: localStorage.getItem('token'),
-      };
-      const response = await axios.post(
-        'http://localhost:3000/api/comics/DeleteFavorite',
-        request
+      const response = await axios.delete(
+        `http://localhost:3000/api/comics/DeleteFavorite/${comic.id}/${localStorage.getItem('token')}`
       );
       if (response!==undefined ) {
         setModalMessage('Comic eliminado de favoritos');
