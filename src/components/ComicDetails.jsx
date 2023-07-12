@@ -38,6 +38,7 @@ function ComicDetails() {
             //redireccionar a login
             navigate('/AppMain');
           }, 5000);
+          console.log(error);
         } else {
           setModalMessage('Error del servidor');
           setModalIsOpen(true);
@@ -87,12 +88,7 @@ function ComicDetails() {
   const addToFavorites = async () => {
     try {
       const response = await axios.post(
-        'http://localhost:3000/api/comics/favorite',
-        {
-          comicId: comic.id,
-          token: localStorage.getItem('token'),
-          // Otros datos que necesites enviar al backend
-        }
+        `http://localhost:3000/api/comics/favorite/${comic.id}/${localStorage.getItem('token')}`
       );
 
       if (response!==undefined ) {
@@ -123,7 +119,7 @@ function ComicDetails() {
   const removeFromFavorites = async () => {
     try {
       const response = await axios.delete(
-        `http://localhost:3000/api/comics/DeleteFavorite/${comic.id}/${localStorage.getItem('token')}`
+        `http://localhost:3000/api/comics/favorite/${comic.id}/${localStorage.getItem('token')}`
       );
       if (response!==undefined ) {
         setModalMessage('Comic eliminado de favoritos');

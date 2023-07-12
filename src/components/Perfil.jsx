@@ -4,6 +4,7 @@ import './styles.css';
 import { Link } from 'react-router-dom';
 import Header from '../page/header';
 import { useNavigate } from 'react-router-dom';
+
  // Supongo que tienes un componente llamado Comics para mostrar la lista de cómics
 
  function Comic({ id, title, image }) {
@@ -27,16 +28,18 @@ function Comics({ comics }) {
   const [squareSize, setSquareSize] = useState(0);
 
   useEffect(() => {
-    const maxSideLength = Math.max(...comics.map(comic => comic.image.width));
+    const maxSideLength = Math.max(...comics.map(comic => comic.node.main_picture.large.width));
     setSquareSize(maxSideLength);
   }, [comics]);
 
   return (
     <section className="comics">
-      {comics.map((comic) => (
+      {comics.map((node) => (
         <Comic
-          key={comic.id}
-          {...comic}
+          key={node.node.id}
+          id={node.node.id}
+          title={node.node.title}
+          image={node.node.main_picture.large}
           style={{
             width: squareSize * 0.05,
             height: squareSize * 0.1,
@@ -54,9 +57,7 @@ function Perfil() {
   useEffect(() => {
   const handleFetchFavoriteComics = async () => {
     try {
-      const response = await axios.post('https://marvel-api-production.up.railway.app/api/comics/favorites', {
-        token: localStorage.getItem('token'),
-      });
+      const response = await axios.get(`http://localhost:3000/api/comics/favorites/${localStorage.getItem('token')}`);
       const data = response.data.data;
       setFavoriteComics(data);
     } catch (error) {
@@ -69,7 +70,7 @@ const navigate = useNavigate();
   const handleLogout = async () => {
    
     try {
-      const response = await axios.post('https://marvel-api-production.up.railway.app/api/user/logout', {
+      const response = await axios.post('http://localhost:3000/api/user/logout', {
         token: localStorage.getItem('token'),
       });
       if (response.status === 200) {

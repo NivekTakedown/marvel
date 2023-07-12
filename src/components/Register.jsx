@@ -17,7 +17,7 @@ function Register() {
 
     try {
       const response = await axios.post(
-        `${"https://marvel-api-production.up.railway.app/api/user/register"}`,
+        `${"http://localhost:3000/api/user/register"}`,
         {
           nombre,
           identificacion,
